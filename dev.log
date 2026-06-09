@@ -1,0 +1,17 @@
+▲ Next.js 16.2.6 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.216.1:3000
+- Environments: .env
+✓ Ready in 603ms
+
+ GET / 500 in 1028ms (next.js: 204ms, application-code: 824ms)
+ GET / 500 in 377ms (next.js: 4ms, application-code: 372ms)
+✓ Compiled in 600ms
+ GET / 200 in 332ms (next.js: 109ms, application-code: 223ms)
+ GET / 200 in 88ms (next.js: 4ms, application-code: 84ms)
+Connected to MongoDB
+ GET /api/products 200 in 1723ms (next.js: 728ms, application-code: 995ms)
+ GET /api/products 200 in 100ms (next.js: 4ms, application-code: 96ms)
+ GET /api/products 200 in 105ms (next.js: 4ms, application-code: 101ms)
+ GET / 200 in 60ms (next.js: 4ms, application-code: 57ms)
+[?25h

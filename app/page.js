@@ -2,6 +2,8 @@
 import {useEffect, useState} from "react";
 import Link from "next/link";
 import { useCart } from "@/app/context/CartContext";
+import AnimatedProducts from "@/app/components/home/sections/AnimatedProducts";
+import BestSellers from "@/app/components/home/sections/BestSellers";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -45,7 +47,14 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4">
+    <div className="min-h-screen bg-gray-50">
+      {/* Animated product showcase - sits at the very top of the home page */}
+      <AnimatedProducts />
+
+      {/* Static Best Selling Products grid - larger than the featured section above */}
+      <BestSellers />
+
+      <div className="py-12 px-4">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-4xl font-bold text-gray-900 mb-2">Products</h1>
         <p className="text-gray-600 mb-12">Discover our amazing collection from Mirpur Bazaar</p>
@@ -102,6 +111,7 @@ export default function Home() {
             <p className="text-gray-500 text-lg">No products available</p>
           </div>
         )}
+      </div>
       </div>
     </div>
   );
