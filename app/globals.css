@@ -1,49 +1,211 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    --background: #ffffff;
+    --foreground: #171717;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --font-sans: var(--font-geist-sans);
+    --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+    :root {
+        --background: #0a0a0a;
+        --foreground: #ededed;
+    }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 /* --- Animated Products marquee (used by the home page) --- */
 @keyframes marquee-scroll {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    /* -50% works because the track is the product list duplicated twice */
-    transform: translateX(-50%);
-  }
+    from {
+        transform: translateX(0);
+    }
+    to {
+        /* -50% works because the track is the product list duplicated twice */
+        transform: translateX(-50%);
+    }
 }
 
 .marquee-track {
-  /* Slower scroll so users can comfortably read product names and see images */
-  animation: marquee-scroll 70s linear infinite;
-  will-change: transform;
+    /* Slower scroll so users can comfortably read product names and see images */
+    animation: marquee-scroll 70s linear infinite;
+    will-change: transform;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .marquee-track {
-    animation: none;
-  }
+    .marquee-track {
+        animation: none;
+    }
+}
+
+/* =============================================================
+   Home page section animations
+   ============================================================= */
+
+/* --- Shop by Category: fade-in-up, staggered --- */
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.category-card {
+    /* Hidden by default, fades in when the --in class is added */
+    opacity: 0;
+    transform: translateY(24px);
+    animation-fill-mode: forwards;
+    animation-duration: 0.7s;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.category-card--in {
+    animation-name: fade-in-up;
+}
+
+/* --- Promotional Banner: shimmer on offer text + pulse on CTA --- */
+@keyframes shimmer-slide {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.shimmer-text {
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    /* Provide a fallback color for browsers that don't support text clipping */
+    color: #fde68a;
+    animation: shimmer-slide 3.5s linear infinite;
+}
+
+@keyframes pulse-cta {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2),
+            0 8px 10px -6px rgba(0, 0, 0, 0.2);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 20px 35px -5px rgba(0, 0, 0, 0.3),
+            0 12px 15px -6px rgba(0, 0, 0, 0.25);
+    }
+}
+
+.promo-cta {
+    animation: pulse-cta 2.2s ease-in-out infinite;
+}
+
+/* --- Why Choose Us: zoom-in on scroll, triggered via JS class --- */
+@keyframes zoom-in {
+    from {
+        opacity: 0;
+        transform: scale(0.85);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.why-box {
+    opacity: 0;
+    transform: scale(0.85);
+    animation-fill-mode: forwards;
+    animation-duration: 0.6s;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.why-box--in {
+    animation-name: zoom-in;
+}
+
+/* --- New Arrivals: hover scale + fade-in once products load --- */
+.arrival-card {
+    /* Pre-animation state: slightly faded and shifted down so the
+       entrance keyframe has somewhere to animate from. */
+    opacity: 0;
+    transform: translateY(16px);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.4s ease;
+    animation-fill-mode: forwards;
+    animation-duration: 0.6s;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.arrival-card--in {
+    animation-name: fade-in-up;
+}
+
+.arrival-card:hover {
+    transform: scale(1.04) translateY(-4px);
+}
+
+/* --- Testimonials: alternating slide-in (left, right, left) --- */
+@keyframes slide-in-left {
+    from {
+        opacity: 0;
+        transform: translateX(-60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slide-in-right {
+    from {
+        opacity: 0;
+        transform: translateX(60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.testimonial-card {
+    opacity: 0;
+    animation-fill-mode: forwards;
+    animation-duration: 0.8s;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.testimonial-card--left.testimonial-card--in {
+    animation-name: slide-in-left;
+}
+
+.testimonial-card--right.testimonial-card--in {
+    animation-name: slide-in-right;
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .category-card,
+    .why-box,
+    .testimonial-card,
+    .arrival-card,
+    .shimmer-text,
+    .promo-cta {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
 }

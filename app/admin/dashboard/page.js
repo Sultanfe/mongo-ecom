@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { useAuth } from "@/app/context/AuthContext";
 
 export default function AdminDashboardPage() {
@@ -81,12 +82,26 @@ export default function AdminDashboardPage() {
                             ({user?.role})
                         </p>
                     </div>
-                    <button
-                        onClick={logout}
-                        className="px-4 py-2 rounded-lg bg-red-500 text-white text-sm font-semibold hover:bg-red-600 transition"
-                    >
-                        Logout
-                    </button>
+                    <div className="flex gap-2 flex-wrap">
+                        <Link
+                            href="/admin/users"
+                            className="px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 transition"
+                        >
+                            Manage Users
+                        </Link>
+                        <Link
+                            href="/admin/products"
+                            className="px-4 py-2 rounded-lg bg-blue-50 text-blue-700 border border-blue-200 text-sm font-semibold hover:bg-blue-100 transition"
+                        >
+                            Manage Products
+                        </Link>
+                        <button
+                            onClick={logout}
+                            className="px-4 py-2 rounded-lg bg-red-500 text-white text-sm font-semibold hover:bg-red-600 transition"
+                        >
+                            Logout
+                        </button>
+                    </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">

@@ -4,6 +4,11 @@ import Link from "next/link";
 import { useCart } from "@/app/context/CartContext";
 import AnimatedProducts from "@/app/components/home/sections/AnimatedProducts";
 import BestSellers from "@/app/components/home/sections/BestSellers";
+import ShopByCategory from "@/app/components/home/sections/ShopByCategory";
+import PromotionalBanner from "@/app/components/home/sections/PromotionalBanner";
+import WhyChooseUs from "@/app/components/home/sections/WhyChooseUs";
+import NewArrivals from "@/app/components/home/sections/NewArrivals";
+import Testimonials from "@/app/components/home/sections/Testimonials";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -50,6 +55,13 @@ export default function Home() {
     <div className="min-h-screen bg-gray-50">
       {/* Animated product showcase - sits at the very top of the home page */}
       <AnimatedProducts />
+
+      {/* New home page sections (Shop by Category → Promo → Why → New Arrivals → Testimonials) */}
+      <ShopByCategory />
+      <PromotionalBanner />
+      <WhyChooseUs />
+      <NewArrivals />
+      <Testimonials />
 
       {/* Static Best Selling Products grid - larger than the featured section above */}
       <BestSellers />
